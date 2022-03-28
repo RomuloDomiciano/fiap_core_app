@@ -1,49 +1,32 @@
 import 'package:fiap_core_app/src/app/components/standard_button.dart';
+import 'package:fiap_core_app/src/app/components/standard_card.dart';
+import 'package:fiap_core_app/src/app/modules/balance_detail/balance_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fiap_core_app/src/utils/export.dart';
 import 'package:fiap_core_app/src/app/components/standard_page.dart';
 
 // ignore: use_key_in_widget_constructors
-class HomePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late String changingText;
-  late bool toChange;
-
-  @override
-  void initState() {
-    toChange = true;
-    changingText = 'Iremos mudar esse texto';
-    super.initState();
-  }
-
-  void changeValue() {
-    setState(
-      () {
-        toChange = !toChange;
-      },
-    );
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StandardPage(
       appBarTitle: homePage,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              StandardButton(
-                onPressed: changeValue,
-                buttonText: 'Mudar estado',
-              ),
-              Text(toChange ? changingText : 'Um novo texto'),
-            ],
-          ),
-        ),
+      body: Column(
+        children: [
+          StandardCard(
+            cardTitle: 'Saldo',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BalancePage(
+                    balanceValue: '25',
+                  ),
+                ),
+              );
+            },
+          )
+        ],
       ),
     );
   }
