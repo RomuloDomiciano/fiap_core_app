@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class StandardCardContent extends StatelessWidget {
-  final String cardTitle;
+  final String leftText;
+  final String? rightText;
 
-  StandardCardContent({required this.cardTitle});
+  StandardCardContent({required this.leftText, this.rightText = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,12 @@ class StandardCardContent extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            cardTitle,
+            leftText,
+            style: TextStyle(fontSize: 20),
+          ),
+          Spacer(),
+          Text(
+            rightText!,
             style: TextStyle(fontSize: 20),
           ),
         ],

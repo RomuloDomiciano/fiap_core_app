@@ -1,6 +1,7 @@
 import 'package:fiap_core_app/src/app/components/standard_button.dart';
 import 'package:fiap_core_app/src/app/components/standard_card.dart';
 import 'package:fiap_core_app/src/app/modules/balance_detail/balance_page.dart';
+import 'package:fiap_core_app/src/app/modules/transaction_page/transaction_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fiap_core_app/src/utils/export.dart';
 import 'package:fiap_core_app/src/app/components/standard_page.dart';
@@ -22,6 +23,20 @@ class HomePage extends StatelessWidget {
                   builder: (context) => BalancePage(
                     balanceValue: '25',
                   ),
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          StandardCard(
+            cardTitle: 'Extrato',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TransactionPage(),
                 ),
               );
             },

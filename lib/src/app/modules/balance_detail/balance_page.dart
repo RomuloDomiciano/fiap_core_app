@@ -25,10 +25,23 @@ class _BalancePageState extends State<BalancePage> {
     parsedValue = double.parse(widget.balanceValue);
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    inputValueController.dispose();
+    print('object');
+  }
+
   changeValue({required String initalValue}) {
     var value = double.parse(initalValue);
     setState(() {
       parsedValue = value;
+    });
+  }
+
+  cleanValue() {
+    setState(() {
+      parsedValue = 0.0;
     });
   }
 
@@ -49,8 +62,17 @@ class _BalancePageState extends State<BalancePage> {
             height: 25,
           ),
           StandardCardContent(
-            cardTitle: 'Valor: R\$ ${parsedValue.toStringAsFixed(2)}',
+            leftText: 'Valor: R\$ ${parsedValue.toStringAsFixed(2)}',
+            rightText: 'eiotaaa',
           ),
+          const SizedBox(
+            height: 25,
+          ),
+          StandardButton(
+              buttonText: 'Limpar Valor',
+              onPressed: () {
+                cleanValue();
+              })
         ],
       ),
     );
