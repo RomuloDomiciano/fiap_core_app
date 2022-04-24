@@ -1,3 +1,4 @@
+import 'package:fiap_core_app/src/app/components/standardDialog.dart';
 import 'package:fiap_core_app/src/app/components/standard_button.dart';
 import 'package:fiap_core_app/src/app/components/standard_content.dart';
 import 'package:fiap_core_app/src/app/components/standard_page.dart';
@@ -46,6 +47,31 @@ class _TransactionPageState extends State<TransactionPage> {
     );
   }
 
+  Future<void> _showMyDialog(String transactionName, num transactionValue) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(transactionName),
+          content: SingleChildScrollView(
+            child: Container(
+              child: Text('O valor da sua conta é de R\$ ${transactionValue.toStringAsFixed(2)} reais'),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return StandardPage(
@@ -84,9 +110,17 @@ class _TransactionPageState extends State<TransactionPage> {
               ),
               itemBuilder: (context, index) {
                 var item = transactionList[index];
-                return StandardCardContent(
-                  leftText: item.transactionName,
-                  rightText: item.transactionValue.toString(),
+                return GestureDetector(
+                  onTap: () {
+                    _showMyDialog(item.transactionName, item.transactionValue);
+                    print(item.transactionName);
+                    print(item.transactionValue);
+                    print(index);
+                  },
+                  child: StandardCardContent(
+                    leftText: item.transactionName,
+                    rightText: item.transactionValue.toString(),
+                  ),
                 );
               },
             ),
